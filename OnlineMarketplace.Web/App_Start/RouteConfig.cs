@@ -16,7 +16,7 @@ namespace OnlineMarketplace.Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Fronted", action = "FrontedIndex", id = UrlParameter.Optional }
+                defaults: new { controller = "Frontend", action = "FrontendIndex", id = UrlParameter.Optional }
             );
         }
     }

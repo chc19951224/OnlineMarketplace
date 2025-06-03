@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -45,6 +46,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -120,7 +127,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\FrontedController.cs" />
+    <Compile Include="Controllers\FrontendController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -143,6 +150,90 @@
     <Content Include="Content\DefaultTheme\css\bootstrap.min.css" />
     <Content Include="Content\DefaultTheme\css\bootstrap.rtl.css" />
     <Content Include="Content\DefaultTheme\css\bootstrap.rtl.min.css" />
+    <Content Include="Content\FrontendTheme\css\ajax-loader.gif" />
+    <Content Include="Content\FrontendTheme\css\bootstrap.min.css" />
+    <Content Include="Content\FrontendTheme\css\fonts.googleapis.com.css" />
+    <Content Include="Content\FrontendTheme\css\normalize.css" />
+    <Content Include="Content\FrontendTheme\css\style.css" />
+    <Content Include="Content\FrontendTheme\css\swiper-bundle.min.css" />
+    <Content Include="Content\FrontendTheme\css\vendor.css" />
+    <Content Include="Content\FrontendTheme\images\arct-icon.png" />
+    <Content Include="Content\FrontendTheme\images\banner-image-1.jpg" />
+    <Content Include="Content\FrontendTheme\images\banner-image-2.jpg" />
+    <Content Include="Content\FrontendTheme\images\banner-image-3.jpg" />
+    <Content Include="Content\FrontendTheme\images\banner-image-4.jpg" />
+    <Content Include="Content\FrontendTheme\images\banner-image-5.jpg" />
+    <Content Include="Content\FrontendTheme\images\banner-image-6.jpg" />
+    <Content Include="Content\FrontendTheme\images\bg-newsletter.jpg" />
+    <Content Include="Content\FrontendTheme\images\cat-item1.jpg" />
+    <Content Include="Content\FrontendTheme\images\cat-item2.jpg" />
+    <Content Include="Content\FrontendTheme\images\cat-item3.jpg" />
+    <Content Include="Content\FrontendTheme\images\cat-large-item1.jpg" />
+    <Content Include="Content\FrontendTheme\images\cat-large-item2.jpg" />
+    <Content Include="Content\FrontendTheme\images\cat-large-item3.jpg" />
+    <Content Include="Content\FrontendTheme\images\cat-sm-item.jpg" />
+    <Content Include="Content\FrontendTheme\images\cat-sm-item2.jpg" />
+    <Content Include="Content\FrontendTheme\images\cat-sm-item3.jpg" />
+    <Content Include="Content\FrontendTheme\images\collection-banner.jpg" />
+    <Content Include="Content\FrontendTheme\images\dhl-logo.png" />
+    <Content Include="Content\FrontendTheme\images\insta-item1.jpg" />
+    <Content Include="Content\FrontendTheme\images\insta-item2.jpg" />
+    <Content Include="Content\FrontendTheme\images\insta-item3.jpg" />
+    <Content Include="Content\FrontendTheme\images\insta-item4.jpg" />
+    <Content Include="Content\FrontendTheme\images\insta-item5.jpg" />
+    <Content Include="Content\FrontendTheme\images\insta-item6.jpg" />
+    <Content Include="Content\FrontendTheme\images\light-logo.png" />
+    <Content Include="Content\FrontendTheme\images\logo.svg" />
+    <Content Include="Content\FrontendTheme\images\logo1.png" />
+    <Content Include="Content\FrontendTheme\images\logo2.png" />
+    <Content Include="Content\FrontendTheme\images\logo3.png" />
+    <Content Include="Content\FrontendTheme\images\logo4.png" />
+    <Content Include="Content\FrontendTheme\images\logo5.png" />
+    <Content Include="Content\FrontendTheme\images\main-logo.png" />
+    <Content Include="Content\FrontendTheme\images\master-card.png" />
+    <Content Include="Content\FrontendTheme\images\newsletter-image.jpg" />
+    <Content Include="Content\FrontendTheme\images\pattern-bg.png" />
+    <Content Include="Content\FrontendTheme\images\paypal-card.png" />
+    <Content Include="Content\FrontendTheme\images\post-image1.jpg" />
+    <Content Include="Content\FrontendTheme\images\post-image2.jpg" />
+    <Content Include="Content\FrontendTheme\images\post-image3.jpg" />
+    <Content Include="Content\FrontendTheme\images\post-image4.jpg" />
+    <Content Include="Content\FrontendTheme\images\post-image5.jpg" />
+    <Content Include="Content\FrontendTheme\images\post-image6.jpg" />
+    <Content Include="Content\FrontendTheme\images\post-image7.jpg" />
+    <Content Include="Content\FrontendTheme\images\post-image8.jpg" />
+    <Content Include="Content\FrontendTheme\images\post-image9.jpg" />
+    <Content Include="Content\FrontendTheme\images\post-large-image1.jpg" />
+    <Content Include="Content\FrontendTheme\images\post-large-image2.jpg" />
+    <Content Include="Content\FrontendTheme\images\post-large-image3.jpg" />
+    <Content Include="Content\FrontendTheme\images\post-large-image4.jpg" />
+    <Content Include="Content\FrontendTheme\images\post-small-image1.jpg" />
+    <Content Include="Content\FrontendTheme\images\post-small-image2.jpg" />
+    <Content Include="Content\FrontendTheme\images\post-small-image3.jpg" />
+    <Content Include="Content\FrontendTheme\images\product-item-1.jpg" />
+    <Content Include="Content\FrontendTheme\images\product-item-10.jpg" />
+    <Content Include="Content\FrontendTheme\images\product-item-2.jpg" />
+    <Content Include="Content\FrontendTheme\images\product-item-3.jpg" />
+    <Content Include="Content\FrontendTheme\images\product-item-4.jpg" />
+    <Content Include="Content\FrontendTheme\images\product-item-5.jpg" />
+    <Content Include="Content\FrontendTheme\images\product-item-6.jpg" />
+    <Content Include="Content\FrontendTheme\images\product-item-7.jpg" />
+    <Content Include="Content\FrontendTheme\images\product-item-8.jpg" />
+    <Content Include="Content\FrontendTheme\images\product-item-9.jpg" />
+    <Content Include="Content\FrontendTheme\images\single-image-2.jpg" />
+    <Content Include="Content\FrontendTheme\images\text-pattern.png" />
+    <Content Include="Content\FrontendTheme\images\video-image-2.jpg" />
+    <Content Include="Content\FrontendTheme\images\video-image.jpg" />
+    <Content Include="Content\FrontendTheme\images\visa-card.png" />
+    <Content Include="Content\FrontendTheme\images\wishlist-item1.jpg" />
+    <Content Include="Content\FrontendTheme\images\wishlist-item2.jpg" />
+    <Content Include="Content\FrontendTheme\images\wishlist-item3.jpg" />
+    <Content Include="Content\FrontendTheme\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\FrontendTheme\js\jquery.min.js" />
+    <Content Include="Content\FrontendTheme\js\modernizr.js" />
+    <Content Include="Content\FrontendTheme\js\plugins.js" />
+    <Content Include="Content\FrontendTheme\js\script.min.js" />
+    <Content Include="Content\FrontendTheme\js\SmoothScroll.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\DefaultTheme\css\Site.css" />
@@ -173,10 +264,12 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Fronted\About.cshtml" />
-    <Content Include="Views\Fronted\Contact.cshtml" />
-    <Content Include="Views\Fronted\FrontedIndex.cshtml" />
+    <Content Include="Views\Frontend\Shared\_FrontendLayout.cshtml" />
+    <Content Include="Views\Frontend\FrontendIndex.cshtml" />
+    <Content Include="Views\Frontend\Shared\_NavbarPartial.cshtml" />
+    <Content Include="Views\Frontend\Shared\_HeaderPartial.cshtml" />
+    <Content Include="Views\Frontend\Shared\_SubscriptionPartial.cshtml" />
+    <Content Include="Views\Frontend\Shared\_FooterPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -207,6 +300,16 @@
     <Content Include="Content\DefaultTheme\js\bootstrap.bundle.js.map" />
     <Content Include="Content\ScriptsSupport\jquery-3.7.0.slim.min.map" />
     <Content Include="Content\ScriptsSupport\jquery-3.7.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineMarketplace.Services\OnlineMarketplace.Services.csproj">
+      <Project>{ecc9aaf3-ee98-404c-a638-a3d3fd6cbdc2}</Project>
+      <Name>OnlineMarketplace.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlineMarketplace.Shared\OnlineMarketplace.Shared.csproj">
+      <Project>{fef04ac1-965d-46a2-85e6-7f2378cee62d}</Project>
+      <Name>OnlineMarketplace.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -241,7 +344,10 @@
       <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

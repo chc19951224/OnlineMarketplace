@@ -52,9 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MarketplaceDbContext.cs" />
-    <Compile Include="Migrations\202506021647172_addCategoriesProductsTable.cs" />
-    <Compile Include="Migrations\202506021647172_addCategoriesProductsTable.Designer.cs">
-      <DependentUpon>202506021647172_addCategoriesProductsTable.cs</DependentUpon>
+    <Compile Include="Migrations\202506031326023_AddCategoryTableProductTable.cs" />
+    <Compile Include="Migrations\202506031326023_AddCategoryTableProductTable.Designer.cs">
+      <DependentUpon>202506031326023_AddCategoryTableProductTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,8 +70,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202506021647172_addCategoriesProductsTable.resx">
-      <DependentUpon>202506021647172_addCategoriesProductsTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202506031326023_AddCategoryTableProductTable.resx">
+      <DependentUpon>202506031326023_AddCategoryTableProductTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

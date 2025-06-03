@@ -7,13 +7,13 @@ namespace OnlineMarketplace.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.5.1")]
-    public sealed partial class addCategoriesProductsTable : IMigrationMetadata
+    public sealed partial class AddCategoryTableProductTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addCategoriesProductsTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddCategoryTableProductTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "202506021647172_addCategoriesProductsTable"; }
+            get { return "202506031326023_AddCategoryTableProductTable"; }
         }
         
         string IMigrationMetadata.Source

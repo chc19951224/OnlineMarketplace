@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class addCategoriesProductsTable : DbMigration
+    public partial class AddCategoryTableProductTable : DbMigration
     {
         public override void Up()
         {
@@ -12,10 +12,10 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.Int(nullable: false),
-                        ImageUrl = c.Int(nullable: false),
-                        Description = c.Int(nullable: false),
-                        Featured = c.Int(nullable: false),
+                        Name = c.String(),
+                        ImageUrl = c.String(),
+                        Description = c.String(),
+                        Featured = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -26,10 +26,10 @@
                         Id = c.Int(nullable: false, identity: true),
                         CategoryId = c.Int(nullable: false),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Name = c.Int(nullable: false),
-                        ImageUrl = c.Int(nullable: false),
-                        Description = c.Int(nullable: false),
-                        Featured = c.Int(nullable: false),
+                        Name = c.String(),
+                        ImageUrl = c.String(),
+                        Description = c.String(),
+                        Featured = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)

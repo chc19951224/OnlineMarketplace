@@ -8,8 +8,8 @@ namespace OnlineMarketplace.Entities
 {
     public class Product : BaseEntity
     {
-        public int CategoryId { get; set; }
-        public Category CategoryName { get; set; }
-        public decimal Price { get; set; }
+        public int CategoryId { get; set; } // 商品的歸類外鍵
+        public Category Category { get; set; } // 商品的歸類，表示多對一的關係
+        public decimal Price { get; set; } // 商品的價格
     }
 }

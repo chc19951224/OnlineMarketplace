@@ -41,7 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappers\FrontedMapper.cs" />
+    <Compile Include="Models\FrontendViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineMarketplace.Entities\OnlineMarketplace.Entities.csproj">
+      <Project>{4DE7A5DC-4075-452F-A1DC-EC9457A438E4}</Project>
+      <Name>OnlineMarketplace.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
