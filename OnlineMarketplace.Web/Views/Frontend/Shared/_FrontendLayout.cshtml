@@ -5,25 +5,22 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    @*<meta name="format-detection" content="telephone=no">*@
+    @*<meta name="apple-mobile-web-app-capable" content="yes">*@
     <meta name="author" content="PradoChang">
     <meta name="keywords" content="電子商務,購物,購物">
     <meta name="description" content="提供安全公平的交易平臺">
 
-    <!-- 加入 Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-ZwYoz0AqPuQ0C0rUqFzkvIgLBo9DR+QXZzVhsl3ltZSlKZkAXZUPo4D/3K3QeYwU0ylXXdAoJepMGJFiwFx6mA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
-    <!-- 引用綁定多個自定義 Bootstrap 主題的 CSS 樣式文件 -->
-    @Styles.Render("~/bundles/FrontendTheme/css")
-
-    <!-- 引用綁定多個檢測瀏覽器與主題兼容的 CSS 樣式文件 -->
+    <!-- #region 【 引 用 CSS 樣 式 】 -->
+    <!-- 引用第三方 Bootstrap 主題樣式文件 -->
+    @Styles.Render("~/bundles/frontend/css")
+    <!-- 引用檢測瀏覽器與主題兼容的樣式文件 -->
     @Scripts.Render("~/bundles/support/modernizr")
+    <!-- #endregion -->
 </head>
 
-<body class="homepage">
-    <!-- SVG Sprite -->
+<body>
+    <!-- #region 【 SVG 圖 標 聲 明 (SVG Sprite) 】 -->
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <defs>
             <symbol xmlns="http://www.w3.org/2000/svg" id="instagram" viewBox="0 0 15 15">
@@ -151,20 +148,19 @@
             </symbol>
         </defs>
     </svg>
+    <!-- #endregion -->
 
-
-    <!-- Preloader -->
+    <!-- #region 【 CSS、JS 預 加 載 聲 明 (Preloader) 】 -->
     <div class="preloader text-white fs-6 text-uppercase overflow-hidden"></div>
+    <!-- #endregion -->
 
-    <!-- Header -->
+    <!-- #region 【 前 台 頁 頭 】 -->
     <header>
-        @Html.Partial("~/Views/Frontend/Shared/_NavbarPartial.cshtml")
-
         @Html.Partial("~/Views/Frontend/Shared/_HeaderPartial.cshtml")
     </header>
+    <!-- #endregion -->
 
-
-    <!-- Main -->
+    <!-- #region 【 前 台 主 體 】 -->
     <main>
         <div class="container body-content">
             @RenderBody()
@@ -172,21 +168,25 @@
 
         @Html.Partial("~/Views/Frontend/Shared/_SubscriptionPartial.cshtml")
     </main>
+    <!-- #endregion -->
 
-
-    <!-- Footer -->
+    <!-- #region 【 前 台 頁 尾 】 -->
     <footer id="footer" class="mt-5">
         @Html.Partial("~/Views/Frontend/Shared/_FooterPartial.cshtml")
     </footer>
+    <!-- #endregion -->
 
-
-    <!-- 引用綁定多個官方 Jquery 版本的 JS 脚本文件 -->
-    @Scripts.Render("~/bundles/support/jquery")
-    <!-- 引用官方 Bootstrap 主題支持的 JS 脚本文件 -->
-    @Scripts.Render("~/bundles/support/bootstrap")
-    <!-- 引用綁定多個自定義 Bootstrap 主題的 JS 脚本文件 -->
-    @Scripts.Render("~/bundles/FrontendTheme/js")
+    <!-- #region 【 引 用 JS 脚 本 】 -->
+    <!-- 引用第三方 Jquery 脚本文件 -->
+    @Scripts.Render("~/bundles/frontend/support/jquery")
+    <!-- 引用第三方 Bootstrap 脚本文件 -->
+    @Scripts.Render("~/bundles/frontend/support/bootstrap")
+    <!-- 引用第三方 Bootstrap 主題脚本文件 -->
+    @Scripts.Render("~/bundles/frontend/support/swiper")
+    @Scripts.Render("~/bundles/frontend/js")
     <!-- 允許子視圖脚本為空 -->
     @RenderSection("scripts", required: false)
+    <!-- #endregion -->
+
 </body>
 </html>
