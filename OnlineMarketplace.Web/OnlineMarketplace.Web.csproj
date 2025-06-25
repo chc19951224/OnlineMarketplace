@@ -128,6 +128,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BackendController.cs" />
+    <Compile Include="Controllers\CategoryApiController.cs" />
     <Compile Include="Controllers\FrontendController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -135,9 +136,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\BackendTheme\css\all.min.css" />
     <Content Include="Content\BackendTheme\css\fonts.googleapis.com.css" />
     <Content Include="Content\BackendTheme\css\sb-admin-2.min.css" />
+    <Content Include="Content\BackendTheme\css\table.css" />
+    <Content Include="Content\BackendTheme\images\undraw_rocket.svg" />
     <Content Include="Content\BackendTheme\js\bootstrap.bundle.min.js" />
     <Content Include="Content\BackendTheme\js\chart-area-demo.js" />
     <Content Include="Content\BackendTheme\js\chart-pie-demo.js" />
@@ -161,6 +163,10 @@
     <Content Include="Content\DefaultTheme\css\bootstrap.min.css" />
     <Content Include="Content\DefaultTheme\css\bootstrap.rtl.css" />
     <Content Include="Content\DefaultTheme\css\bootstrap.rtl.min.css" />
+    <Content Include="Content\DefaultTheme\dataTables.bootstrap4.js" />
+    <Content Include="Content\DefaultTheme\dataTables.bootstrap4.min.js" />
+    <Content Include="Content\DefaultTheme\jquery.dataTables.js" />
+    <Content Include="Content\DefaultTheme\jquery.dataTables.min.js" />
     <Content Include="Content\FrontendTheme\css\ajax-loader.gif" />
     <Content Include="Content\FrontendTheme\css\aos.css" />
     <Content Include="Content\FrontendTheme\css\bootstrap.min.css" />
@@ -259,6 +265,7 @@
     <Content Include="Content\DefaultTheme\js\bootstrap.esm.min.js" />
     <Content Include="Content\DefaultTheme\js\bootstrap.js" />
     <Content Include="Content\DefaultTheme\js\bootstrap.min.js" />
+    <Content Include="Content\BackendTheme\js\zh-HANT.json" />
     <None Include="Content\ScriptsSupport\jquery-3.7.0.intellisense.js" />
     <Content Include="Content\ScriptsSupport\jquery-3.7.0.js" />
     <Content Include="Content\ScriptsSupport\jquery-3.7.0.min.js" />
@@ -290,9 +297,14 @@
     <Content Include="Views\Backend\Shared\_HeaderPartial.cshtml" />
     <Content Include="Views\Backend\Shared\_FooterPartial.cshtml" />
     <Content Include="Views\Backend\Shared\_SidebarPartial.cshtml" />
+    <Content Include="Views\Backend\ManageCategoryPage.cshtml" />
+    <Content Include="Views\Backend\ManageProductPage.cshtml" />
+    <Content Include="Views\Backend\CreateCategoryPage.cshtml" />
+    <Content Include="Views\Backend\UpdateCategoryPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\Categories\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\DefaultTheme\css\bootstrap.rtl.min.css.map" />

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineMarketplace.DataAccess
+namespace OnlineMarketplace.Repositories
 {
     public class MarketplaceDbContext : DbContext, IDisposable
     {

@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Data;
+using System.Web;
 using System.Web.Optimization;
 
 namespace OnlineMarketplace.Web
@@ -56,9 +57,9 @@ namespace OnlineMarketplace.Web
 
             #region 【 Backend 第三方主題 CSS 捆綁 】
             bundles.Add(new StyleBundle("~/bundles/backend/css").Include(
-                        "~/Content/BackendTheme/css/all.min.css",
                         "~/Content/BackendTheme/css/fonts.googleapis.com.css",
-                        "~/Content/BackendTheme/css/sb-admin-2.min.css"));
+                        "~/Content/BackendTheme/css/sb-admin-2.min.css",
+                        "~/Content/BackendTheme/css/table.css"));
             #endregion
             #endregion
         }

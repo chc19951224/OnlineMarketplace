@@ -51,13 +51,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackendService.cs" />
+    <Compile Include="CategoryService.cs" />
     <Compile Include="FrontendService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OnlineMarketplace.DataAccess\OnlineMarketplace.DataAccess.csproj">
+    <ProjectReference Include="..\OnlineMarketplace.DataAccess\OnlineMarketplace.Repositories.csproj">
       <Project>{9fc9c44e-b5fa-405e-8441-6dd6a6c818dd}</Project>
-      <Name>OnlineMarketplace.DataAccess</Name>
+      <Name>OnlineMarketplace.Repositories</Name>
     </ProjectReference>
     <ProjectReference Include="..\OnlineMarketplace.Entities\OnlineMarketplace.Entities.csproj">
       <Project>{4de7a5dc-4075-452f-a1dc-ec9457a438e4}</Project>

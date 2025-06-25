@@ -10,13 +10,12 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-
-    <!-- #region 【 引 用 CSS 樣 式 】 -->
+    <!-- # region 【 引 用 CSS 樣 式 】 -->
     <!-- 引用第三方 Bootstrap 主題樣式文件 -->
     @Styles.Render("~/bundles/backend/css")
     <!-- 引用檢測瀏覽器與主題兼容的樣式文件 -->
     @Scripts.Render("~/bundles/support/modernizr")
-    <!-- #endregion -->
+    <!-- # endregion -->
 </head>
 
 <body id="page-top">
@@ -32,15 +31,15 @@
                     @Html.Partial("~/Views/Backend/Shared/_HeaderPartial.cshtml")
                 </header>
                 <!-- #endregion -->
-
                 <!-- #region 【 後 台 主 體 】 -->
                 <main>
                     <div class="container body-content">
                         @RenderBody()
                     </div>
                 </main>
-                <!-- #endregion -->=
+                <!-- #endregion -->
             </div>
+
             <!-- #region 【 後 台 頁 尾 】 -->
             <footer class="sticky-footer bg-white">
                 @Html.Partial("~/Views/Backend/Shared/_FooterPartial.cshtml")
@@ -56,7 +55,7 @@
 
     <!-- Logout Modal【登出模塊】-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -75,7 +74,6 @@
         </div>
     </div>
 
-
     <!-- #region 【 引 用 JS 脚本 】 -->
     <!-- 引用第三方 Jquery 脚本文件 -->
     @Scripts.Render("~/bundles/backend/support/jquery")
@@ -83,7 +81,8 @@
     @Scripts.Render("~/bundles/backend/support/bootstrap")
     <!-- 引用第三方 Bootstrap 主題脚本文件 -->
     @Scripts.Render("~/bundles/backend/js")
-    <!-- 允許子視圖脚本為空 -->
+
+    <!-- 允許子視圖選擇性插入脚本 -->
     @RenderSection("scripts", required: false)
     <!-- #endregion -->
 </body>

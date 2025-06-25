@@ -1,0 +1,281 @@
+﻿<!-- 引用视图模型 -->
+@model OnlineMarketplace.Shared.Models.CategoryViewModel.ManageCategoryViewModel
+
+<!-- 網站標題和引用母版 -->
+@{
+    ViewBag.Title = "管 理 分 類 頁";
+    Layout = "~/Views/Backend/Shared/_BackendLayout.cshtml";
+}
+
+<!-- 路徑導航 -->
+<div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href=@Url.Action("BackendIndex","Backend")>首頁</a>
+            </li>
+
+            <li class="breadcrumb-item active">
+                管理分類頁
+            </li>
+        </ol>
+    </nav>
+</div>
+
+<!-- 頂部功能列 -->
+<div class="search-group">
+    <!-- 搜索輸入框 -->
+    <input id="searchInput" type="text" class="form-control" placeholder="請輸入分類的名稱進行查詢..." />
+
+    <!-- 搜索按鈕 -->
+    <button id="searchButton" class="btn btn-search">
+        <i class="fa fa-search">&nbsp;&nbsp;</i>搜索
+    </button>
+
+    <!-- 重置按鈕 -->
+    <button id="resetButton" class="btn btn-reset">
+        <i class="fa fa-sync">&nbsp;&nbsp;</i>重置
+    </button>
+
+    <!-- 新增按鈕 -->
+    <a href=@Url.Action("CreateCategoryPage", "Backend") class="btn btn-add">
+        <i class="fa fa-plus">&nbsp;&nbsp;</i>新增分類
+    </a>
+</div>
+
+<!-- 表格内容 -->
+<table id="table" class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>名 稱</th>
+            <th>圖 片</th>
+            <th>熱 門</th>
+            <th>操 作</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    </tbody>
+</table>
+
+<!-- 尾部功能列 -->
+<div class="table-footer d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 p-3 border-top">
+    <!-- 過濾選項 -->
+    <div class="page-size d-flex align-items-center mb-2 mb-md-0">
+        <span class="me-2">分類數量&nbsp;</span>
+
+        <select id="selectSize" class="form-select form-select-sm page-size-select" title="每頁顯示幾筆資料">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+    </div>
+
+    <!-- 分頁選項 -->
+    <div class="pagination-wrapper d-flex justify-content-center mb-2 mb-md-0 flex-grow-1">
+        <ul id="pagination" class="pagination mb-2 mb-md-0 justify-content-center">
+            <!-- 上一頁 -->
+            <li id="previous" class="page-item">
+                <a class="page-link" href="#">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+
+            <!-- pagination -->
+            <!-- 下一頁 -->
+            <li id="next" class="page-item">
+                <a class="page-link" href="#">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <!-- 顯示數據 -->
+    <div id="recordInfo" class="alert alert-primary d-flex align-items-center justify-content-center mt-3 mb-0" style="font-size: 15px;">
+        <i class="fa fa-database me-2">&nbsp;&nbsp;</i>
+        目前顯示
+        <strong class="mx-1">
+            <span id="recordStart">
+                <!-- pagestart -->
+            </span>~
+            <span id="recordEnd">
+                <!-- pagesize -->
+            </span>
+        </strong> 筆，共
+        <strong class="mx-1">
+            <span id="recordTotal">
+                <!-- totalrecords -->
+            </span>
+        </strong> 筆
+    </div>
+</div>
+
+<!-- 圖片放大 Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content p-3" style="max-width: 700px; margin: auto;">
+            <div class="modal-body text-center p-3">
+                <img src="" id="modalImage" class="modal-image" alt="放大圖片" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Javascript 脚本控制 -->
+<script>
+    //#region 【 全 局 變 量 聲 明 】
+    const tbody = document.querySelector("tbody");
+
+    const selectSize = document.getElementById("selectSize");
+
+    const recordStart = document.getElementById("recordStart");
+    const recordEnd = document.getElementById("recordEnd");
+    const recordTotal = document.getElementById("recordTotal");
+
+    const previousPage = document.getElementById("previous");
+    const pagination = document.getElementById("pagination");
+    const nextPage = document.getElementById("next");
+    //#endregion
+
+    //#region 【 FetchApi 】
+    async function CategoryFetchApi() {
+        try {
+            const response = await fetch("/Category/Api/GetCategoryApi", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ pageNumber: 1, pageSize: 10 })
+            })
+
+            if (!response.ok) {
+                alert("網絡錯誤！");
+            }
+
+            const data = await response.json();
+            if (data.Success) {
+                RenderTable(data.JsonResult.Categories);            // 渲染表格内容
+                RenderFilter(data.JsonResult.PageRequest);          // 渲染過濾選項
+                RenderPagination(data.JsonResult.PageRequest);      // 渲染分頁選項
+                RenderIndicator(data.JsonResult.PageRequest);       // 渲染顯示數據
+            }
+            else
+            {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="text-center text-muted" style="padding: 60px 0;">
+                          <div style="display: inline-flex; flex-direction: column; align-items: center; font-size: 16px;">
+                            <svg width="96" height="96" style="margin-bottom: 16px;" viewBox="0 0 24 24" fill="none">
+                              <path fill="currentColor"
+                                d="M12,2A10,10 0 1,0 22,12A10,10 0 0,0 12,2M11,6H13V13H11V6M11,16H13V18H11V16Z" />
+                            </svg>
+
+                            <div style="font-size: 22px;font-weight: 500;">目前查無符合條件的數據！</div>
+                            <div style="font-size: 18px; color: #aaa; margin-top: 4px;">請調整篩選條件後再試一次</div>
+                          </div>
+                        </td>
+                    </tr>
+                 `;
+            }
+        }
+        catch {
+            alert("請求錯誤！");
+        }
+    }
+    //#endregion
+
+    //#region 【 渲 染 表 格 】
+    function RenderTable(Categories) {
+        if (!Array.isArray(Categories) || Categories.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="4" class="text-center text-muted" style="padding: 60px 0;">
+                      <div style="display: inline-flex; flex-direction: column; align-items: center; font-size: 16px;">
+                        <svg width="96" height="96" style="margin-bottom: 16px;" viewBox="0 0 24 24" fill="none">
+                          <path fill="currentColor"
+                            d="M12,2A10,10 0 1,0 22,12A10,10 0 0,0 12,2M11,6H13V13H11V6M11,16H13V18H11V16Z" />
+                        </svg>
+
+                        <div style="font-size: 22px;font-weight: 500;">目前查無符合條件的數據！</div>
+                        <div style="font-size: 18px; color: #aaa; margin-top: 4px;">請調整篩選條件後再試一次</div>
+                      </div>
+                    </td>
+                </tr>
+             `;
+            return;
+        }
+        tbody.innerHTML = Categories.map(obj => `
+            <tr>
+                <td>${obj.CategoryName}</td>
+                <td>
+                    <img src="${obj.CategoryImageUrl}" class="category-img" alt="分類圖片" />
+                </td>
+                <td>
+                    <span class="badge ${obj.FeaturedCategory ? 'bg-danger' : 'bg-info'} text-white">
+                        ${obj.FeaturedCategory ? '熱門' : '一般'}
+                    </span>
+                </td>
+                <td>
+                    <a href="@Url.Action("UpdateCategoryPage", "Backend")?id=${obj.CategoryId}" class="btn btn-sm btn-edit">
+                        <i class="fa fa-edit">&nbsp;&nbsp;</i>修 改
+                    </a>
+
+                    <button class="btn btn-sm btn-delete">
+                        <i class="fa fa-trash">&nbsp;&nbsp;</i>刪 除
+                    </button>
+                </td>
+            </tr>
+        `).join("");
+    }
+    //#endregion
+
+    //#region 【 渲 染 分 頁 】
+    function RenderPagination(PageRequest) {
+        if (!PageRequest) {
+            return;
+        }
+        else {
+            // 若上一頁元素後面
+            while (previousPage.nextSibling && previousPage.nextSibling != nextPage) {
+                pagination.removeChild(previousPage.nextSibling);
+            }
+
+            for (let i = 1; i <= PageRequest.TotalPages; i++) {
+                // 創建<li>
+                const li = document.createElement("li");
+                li.classList.add("page-item");
+
+                if (i === PageRequest.PageNumber) {
+                    li.classList.add("active");
+                }
+
+                // 創建<a>
+                const a = document.createElement("a");
+                a.classList.add("page-link");
+                a.href = "#";
+                a.textContent = i;
+
+                // 將<a>放入<li>
+                li.append(a);
+                pagination.insertBefore(li, nextPage);
+            }
+        }
+    }
+    //#endregion
+
+    //#region 【 渲 染 過 濾 選 項 】
+    function RenderFilter(PageRequest) {
+        selectSize.value = PageRequest.PageSize;
+    } 
+    //#endregion
+
+    //#region 【 渲 染 顯 示 數 據 】
+    function RenderIndicator(PageRequest) {
+        recordEnd.textContent = PageRequest.PageSize;
+        recordTotal.textContent = PageRequest.TotalRecords;
+    } 
+    //#endregion
+
+    CategoryFetchApi();
+</script>

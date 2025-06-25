@@ -10,15 +10,17 @@ namespace OnlineMarketplace.Web.Controllers
 {
     public class FrontendController : Controller
     {
+        # region 【 控 制 前 端 頁 面 】
         FrontendService frontendService = new FrontendService();
 
         public ActionResult FrontendIndex()
         {
-            var viewModel = new FrontendViewModel.IndexViewModel
-            {
-                FeaturedCategoryBlock = frontendService.GetFeaturedCategoryBundle()
-            };
+            //var viewModel = new FrontendViewModel.IndexViewModel
+            //{
+            //    FeaturedCategoryBlock = frontendService.GetFeaturedCategoryBundle()
+            //};
             return View();
         }
+        #endregion
     }
 }

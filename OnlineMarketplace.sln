@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.36105.23 d17.13
+VisualStudioVersion = 17.13.36105.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMarketplace.Web", "OnlineMarketplace.Web\OnlineMarketplace.Web.csproj", "{1AD677DB-708D-46B0-BCC2-23A3167B7C43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMarketplace.DataAccess", "OnlineMarketplace.DataAccess\OnlineMarketplace.DataAccess.csproj", "{9FC9C44E-B5FA-405E-8441-6DD6A6C818DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMarketplace.Repositories", "OnlineMarketplace.DataAccess\OnlineMarketplace.Repositories.csproj", "{9FC9C44E-B5FA-405E-8441-6DD6A6C818DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMarketplace.Entities", "OnlineMarketplace.Entities\OnlineMarketplace.Entities.csproj", "{4DE7A5DC-4075-452F-A1DC-EC9457A438E4}"
 EndProject

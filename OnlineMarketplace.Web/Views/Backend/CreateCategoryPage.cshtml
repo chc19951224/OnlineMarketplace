@@ -1,0 +1,156 @@
+﻿<!-- 引用視圖模型 -->
+
+
+<!-- 網站標題和引用母版 -->
+@{
+    ViewBag.Title = "新 增 分 類";
+    Layout = "~/Views/Backend/Shared/_BackendLayout.cshtml";
+}
+
+<!-- 前端區域 -->
+<div class="container my-5">
+    <div class="card shadow rounded-4">
+        <!-- 主標題 -->
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0"><i class="fa-solid fa-folder-plus me-2"></i> 添加新的分類</h4>
+        </div>
+
+        <!-- 表單區域 -->
+        <div class="card-body bg-light">
+            <form id="tableForm" enctype="multipart/form-data" class="needs-validation" novalidate>
+                <!-- 類別名稱 -->
+                <div class="mb-3">
+                    <label class="form-label">類別名稱 <span class="text-danger">*</span></label>
+
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-tag"></i></span>
+                        <input name="CategoryName" type="text" class="form-control" required placeholder="例如：飲料、零食、家電">
+                    </div>
+
+                    <div class="form-text text-muted">請輸入該分類的清楚名稱，將顯示於前台</div>
+                </div>
+
+                <!-- 類別描述 -->
+                <div class="mb-3">
+                    <label class="form-label">類別描述 <span class="text-danger">*</span></label>
+
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-align-left"></i></span>
+                        <textarea name="CategoryDescription" class="form-control" rows="3" required placeholder="簡要描述此分類的用途或內容"></textarea>
+                    </div>
+
+                    <div class="form-text text-muted">說明將用於後台管理或 SEO 描述</div>
+                </div>
+
+                <!-- 類別圖片 -->
+                <div class="mb-3">
+                    <label class="form-label">類別圖片（可選）</label>
+
+                    <div class="card border-dashed text-center p-3" style="border: 2px dashed #ced4da;">
+                        <!-- 提示信息 -->
+                        <label for="UploadButton" class="d-block cursor-pointer upload-hint">
+                            <i class="fa-solid fa-cloud-arrow-up fa-2x text-primary mb-2"></i>
+                            <div class="fw-semibold">點擊或拖曳上傳圖片</div>
+                            <div class="text-muted small">支援 JPG / PNG，建議尺寸 800x600</div>
+                        </label>
+
+                        <!-- 上傳按鈕 -->
+                        <input id="UploadButton" name="CategoryImageUrl" type="file" class="form-control d-none" accept=".jpg, .png">
+
+                        <!-- 預覽效果 -->
+                        <div class="mt-3">
+                            <img id="ImagePreview" class="img-fluid rounded" src="#" alt="預覽圖片" style="display: none; max-height: 200px; object-fit: cover;" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 熱門類別 -->
+                <div class="mb-3 text-center">
+                    <label class="form-label d-block">此分類是否為熱門？</label>
+                    <div class="row justify-content-center">
+                        <div class="col-md-3">
+                            <input id="trueFeatured" name="FeaturedCategory" type="radio" value="true" class="btn-check" checked>
+                            <label class="btn btn-outline-warning w-100 py-3"  for="trueFeatured">
+                                <i class="fa-solid fa-star me-1"></i> 是，顯示於首頁
+                            </label>
+                        </div>
+
+                        <div class="col-md-3">
+                            <input id="falseFeatured" name="FeaturedCategory" type="radio" value="false" class="btn-check">
+                            <label class="btn btn-outline-secondary w-100 py-3"  for="falseFeatured">
+                                <i class="fa-regular fa-star me-1"></i> 否，僅內部顯示
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-text text-muted mt-2">熱門類別將在前台首頁做重點推薦展示</div>
+                </div>
+
+                <!-- 提交按鈕 -->
+                <div class="text-center mt-4">
+                    <button id="ConfirmButton" type="submit" class="btn btn-success btn-lg px-5 me-2">
+                        <i class="fa-solid fa-circle-plus me-1"></i> 新建分類
+                    </button>
+
+                    <a href="@Url.Action("ManageCategoryPage","Backend")" class="btn btn-secondary btn-lg px-5">
+                        <i class="fa-solid fa-arrow-left me-1"></i> 返回列表
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- JavaScript 脚本區域 -->
+@section scripts{
+    <script>
+        let preview = document.getElementById("ImagePreview");
+        document.getElementById("UploadButton").addEventListener("change", function (change) {
+            let image = change.target.files[0];
+
+            if (image) {
+                let reader = new FileReader();
+
+                reader.onload = function (event) {
+                    preview.src = event.target.result;
+                    preview.style.display = "block";
+
+                    let hint = document.querySelector(".upload-hint");
+                    if (hint) {
+                        hint.remove(); // 直接從 DOM 移除整個提示區塊
+                    }
+                };
+                reader.readAsDataURL(image);
+            }
+        })
+
+        document.getElementById("ConfirmButton").addEventListener("click", function (click) {
+            click.preventDefault();
+            let tableData = new FormData(document.getElementById("tableForm"));
+
+            fetch("/Category/CreateCategory", {
+                method: "POST",
+                body: tableData
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    else {
+                        alert("請求錯誤！" + response.status);
+                    }
+                })
+                .then((data) => {
+                    if (data.Success) {
+                        alert(data.Message);
+                        document.getElementById("tableForm").reset();
+                        window.location.href = data.RedirectUrl;
+                    }
+                    else {
+                        alert(data.Message);
+                        document.getElementById("tableForm").reset();
+                    }
+                });
+        })
+    </script>
+}

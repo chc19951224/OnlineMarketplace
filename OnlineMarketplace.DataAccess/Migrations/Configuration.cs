@@ -5,14 +5,14 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<OnlineMarketplace.DataAccess.MarketplaceDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<OnlineMarketplace.Repositories.MarketplaceDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(OnlineMarketplace.DataAccess.MarketplaceDbContext context)
+        protected override void Seed(OnlineMarketplace.Repositories.MarketplaceDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
